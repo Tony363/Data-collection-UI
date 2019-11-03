@@ -1,13 +1,35 @@
 from random import seed
 from random import random
 import xgboost as xgb
-# seed random number generator
+import numpy as np
+import operator
+
 seed(1)
-# generate random numbers between 0-1
-value_1 = []
-value_2 = []
-dataset1 = [value_1,value_2]
-dataset2 = []
+# value_1 = []
+# value_2 = []
+# X = np.array([value_1,value_2])
+
+X = []
+Y = []
+ 
+for _ in range(10):
+    row = []
+    x1 = random()
+    x2 = random()
+    row.append(x1)
+    row.append(x2)
+    X.append(row)
+
+    if x1 + x2 > 1:
+         z = 1
+         Y.append(z)
+    else:
+         z = 0
+         Y.append(z)
+X_sorted = sorted(X, key=operator.itemgetter(0))
+print(X_sorted)
+print(Y)
+
 
 
 # column = []
@@ -26,20 +48,3 @@ dataset2 = []
 #     print(row)
 #     column.append(row)
 # print(column)
-
-for _ in range(10):
-    row = []
-    x1 = random()
-    x2 = random()
-    value_1.append(x1)
-    value_2.append(x2)
-    # if x1 + x2 > 1:
-    #     z = 1
-    #     dataset3.append(z)
-    # else:
-    #     z = 0
-    #     dataset3.append(z)
-print(dataset1)
-
-# x = column[]
-
