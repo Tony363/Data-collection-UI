@@ -18,5 +18,5 @@ for _ in range(100):
         row.append(z)
     print(row)
     column.append(row)
-print(column)
+# print(column)
 
