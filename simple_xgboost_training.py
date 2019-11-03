@@ -61,6 +61,6 @@ bst_svm.dump_model('dump_svm.raw.txt')
 joblib.dump(bst, 'bst_model.pkl', compress=True)
 joblib.dump(bst_svm, 'bst_svm_model.pkl', compress=True)
 
-# print("Numpy array precision:", precision_score(y_test, best_preds, average='macro'))
-# print("Svm file precision:",precision_score(y_test, best_preds_svm, average='macro'))
+print("Numpy array precision:", precision_score(y_test, best_preds, average='macro'))
+print("Svm file precision:",precision_score(y_test, best_preds_svm, average='macro'))
 
