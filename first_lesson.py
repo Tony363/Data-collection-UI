@@ -1,6 +1,7 @@
 from random import seed
 from random import random
-import xgboost as xgb
+from sklearn.model_selection import train_test_split
+#import xgboost as xgb
 import numpy as np
 import operator
 
@@ -8,10 +9,12 @@ seed(1)
 # value_1 = []
 # value_2 = []
 # X = np.array([value_1,value_2])
-
-X = []
-Y = []
+# x, y = np.arange(10).reshape((5, 2)), range(5) #np.random.randint(5, size=(2, 4))
+# X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.33, random_state=42)
  
+X = [[random(),random()] for i in range(10)]
+Y = []
+
 for _ in range(10):
     row = []
     x1 = random()
@@ -26,8 +29,11 @@ for _ in range(10):
     else:
          z = 0
          Y.append(z)
+
+del X[5]
 X_sorted = sorted(X, key=operator.itemgetter(0))
-print(X_sorted)
+
+print(len(X_sorted[0]))
 print(Y)
 
 
