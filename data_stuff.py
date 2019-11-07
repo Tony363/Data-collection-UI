@@ -4,7 +4,7 @@ import random
 
 data = np.random.rand(5, 10)  # 5 entities, each contains 10 featusres
 label = np.random.randint(2, size=5)  # binary
-print(label)
+# print(label)
 dtrain = xgb.DMatrix(data, label=label)
 
 
