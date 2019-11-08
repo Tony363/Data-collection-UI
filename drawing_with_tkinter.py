@@ -14,9 +14,9 @@ def clicked_circle(event):
         30,
         40
     )
+    return circle
     
-    
-def myfunction(event):
+def myfunction(event,clicked_circle):
         x, y = event.x, event.y
         canvas.move(circle,x,y)  
     
