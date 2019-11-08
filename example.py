@@ -29,6 +29,8 @@ move1()
 def cursor(event):
     m1=event.x
     m2=event.y
+    circle = canvas.create_oval(10,20,30,40)
+    canvas.move(circle,m1,m2)
     return m1, m2
 tk.bind("<B1-Motion>", cursor)
 canvas.pack()

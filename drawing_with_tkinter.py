@@ -1,26 +1,27 @@
 import tkinter as tk
 from random import randrange
 
-def myfunction(event):
-    x, y = event.x, event.y
-    if canvas.old_coords:
-        x1, y1 = canvas.old_coords
+    # circle.delete(circle)
+    # if canvas.old_coords:
+    #     x1, y1 = canvas.old_coords
         # canvas.create_oval(x, y, x1, y1)
-    canvas.old_coords = x, y
-
-def delete_lines(event):
-    canvas.delete('all')
+    # canvas.old_coords = x, y
 
 def clicked_circle(event):
-    print("button was clicked")
+    circle = canvas.create_oval(
+        10,
+        20,
+        30,
+        40
+    )
     
-    canvas.create_oval(
-        randrange(900),
-        randrange(900),
-        randrange(900),
-        randrange(900)
-        )
-
+    
+def myfunction(event):
+        x, y = event.x, event.y
+        canvas.move(circle,x,y)  
+    
+def delete_lines(event):
+    canvas.delete('all')
 
 root = tk.Tk()
 
