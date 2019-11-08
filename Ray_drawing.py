@@ -5,10 +5,10 @@ import time
 database = []
 
 def getorigin(eventorigin):
-    global x0,y0
+    
     x0 = eventorigin.x
     y0 = eventorigin.y
-    #print(x0,y0)
+    print(x0,y0)
     return x0,y0
 
 
@@ -46,7 +46,7 @@ my_canvas.pack()
 
 # my_canvas.create_line(0,0,300,300,fill='black')
 root.bind('<B1-Motion>',move)
-root.bind("<Button-1>",getorigin)
+root.bind("<Button-3>",getorigin)
 root.mainloop()
 # circle.append(my_canvas.create_oval(10,20,50,90))
 # circle.append(my_canvas.create_oval(20,30,40,50))
