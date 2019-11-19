@@ -14,11 +14,10 @@ import operator
 
 f=open("dump.raw.txt","w+")
 g=open("featmap.txt","w+")
-A=[[random(),random()] for i in range(10)]
+# A=[[random(),random()] for i in range(10)]
 
 seed(1)
-value1=[]
-value2=[]
+
 X=[]
 Y=[]
 
@@ -41,15 +40,8 @@ for _ in range(10):
 
 
 print(X)
+print(Y)
 
-#remove element from a list
-del X[5]
-#put 5th element in X_new
-X_new=X.pop(5)
-#Put 2nd element in Xnew2
-Xnew2=X[-2]
-#determine length of list element 0
-len(X[0])
 
 #need to get list first item and sort it
 X_sorted = sorted(X, key=operator.itemgetter(0))
@@ -57,20 +49,26 @@ print(X_sorted)
 
 #remove a value from the list
 
-
-
-print(Y)
-
 dtrain=xgb.DMatrix(X[0:70],label=Y[0:70])
 dtest=xgb.DMatrix(X[71:100],label=Y[71:100])
+dtest_svm = xgb.DMatrix('dtest.svm')
 
-param = {'max_depth': 3, 'eta': 2, 'objective': 'binary:logistic'}
+param = {
+        'max_depth': 3, 
+        'eta': 2, 
+        'objective': 'binary:logistic'
+        }
 param['nthread'] = 4
 param['eval_metric'] = 'auc'
 evallist = [(dtest, 'eval'), (dtrain, 'train')]
 num_round = 5
-bst = xgb.train(param, dtrain, num_round, evallist)
 
+bst = xgb.train(param, dtrain, num_round, evallist)
+preds = bst.predict(dtest)
+best_preds = np.asarray([np.argmax(line) for line in preds])
+
+bst_svm = xgb.train(param, dtrain_svm, num_round)
+preds_ = bst.predict(dtest_svm)
 
 bst.save_model('0001.model')
 #The model and its feature map can also be dumped to a text file.
@@ -83,12 +81,8 @@ bst.dump_model('dump.raw.txt', 'featmap.txt')
 f.close
 g.close
 
-bst = xgb.Booster({'nthread': 4})  # init model
+# bst = xgb.Booster({'nthread': 4})  # init model
 bst.load_model('model.bin')  # load data
 
-
-#data = np.random.rand(5, 10)  # 5 entities, each contains 10 features
-#label = np.random.randint(2, size=5)  # binary target
-#dtrain = xgb.DMatrix(data, label=label)
 
 
