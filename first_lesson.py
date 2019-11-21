@@ -46,18 +46,8 @@ for _ in range(100):
 # print(Y)
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-
-
-#need to get list first item and sort it
-# X_sorted = sorted(X, key=operator.itemgetter(0))
-# print(X_sorted)
-
-#remove a value from the list
-
 dtrain = xgb.DMatrix(X[0:70],label=Y[0:70])
 dtest = xgb.DMatrix(X[71:100],label=Y[71:100])
-
-
 
 dtrain_svm = xgb.DMatrix('dtrain.svm')
 dtest_svm = xgb.DMatrix('dtest.svm')
@@ -75,7 +65,6 @@ num_round = 5
 bst = xgb.train(param, dtrain, num_round, evallist)
 preds = bst.predict(dtest)
 best_preds = np.asarray([np.argmax(line) for line in preds])
-print(bst)
 
 bst.save_model('0001.model')
 bst.dump_model('dump.raw.txt')
