@@ -6,7 +6,7 @@ import psutil
 
 new_format = []
 
-INPUT_DIR = r"C:\Users\Tony\Desktop\notpat"
+INPUT_DIR = r"C:\Users\Tony\Desktop\github\xgboost-with-raymond\excel"
 
 # def iterate_rows(infile,new_format):
   
@@ -24,13 +24,15 @@ INPUT_DIR = r"C:\Users\Tony\Desktop\notpat"
      
 for filename in os.listdir(INPUT_DIR):
 
-    with open(os.path.join(INPUT_DIR,filename), 'r+', encoding='utf-8') as infile:
+    with open(os.path.join(INPUT_DIR,filename), 'r+') as infile:
       
         try:
             while True:
                 try:
-                    head = [int(next(infile))]
+                    head = [next(infile)]
                     for row in head:
+                        if row == 'ï»¿1\n':
+                            row = 1
                         # print(row)
                         new_format.append(row)
                     # print(new_format)
