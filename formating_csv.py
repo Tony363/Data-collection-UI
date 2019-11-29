@@ -24,18 +24,18 @@ INPUT_DIR = r"C:\Users\Tony\Desktop\github\xgboost-with-raymond\excel"
      
 for filename in os.listdir(INPUT_DIR):
 
-    with open(os.path.join(INPUT_DIR,filename), 'r+') as infile:
+    with open(os.path.join(INPUT_DIR,filename), 'r+',encoding='utf-8-sig') as infile:
       
         try:
             while True:
                 try:
-                    head = [next(infile)]
+                    head = [int(next(infile))]
                     for row in head:
-                        if row == 'ï»¿1\n':
-                            row = 1
+                        # if row == 'ï»¿1\n':
+                        #     row = 1
                         # print(row)
                         new_format.append(row)
-                    # print(new_format)
+                
                 except MemoryError:
 
                     raise StopIteration()
