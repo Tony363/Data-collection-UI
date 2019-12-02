@@ -7,7 +7,8 @@ server_socket.bind(('', 12000))
 while True:
     # rand = random.randint(0, 10)
     message, address = server_socket.recvfrom(1024)
-    message = message.upper()
+    # message = message.upper()
+    message = b'message returned'
     print(message)
     print(address)
     # if rand >= 4:
