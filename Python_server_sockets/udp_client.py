@@ -1,7 +1,7 @@
 import time
 import socket
 
-for pings in range(10):
+for pings in range(5):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     client_socket.settimeout(1.0)
     message = b'test'

@@ -4,12 +4,16 @@ import socket
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind(('', 12000))
 
+# for i in range(5):
 while True:
-    # rand = random.randint(0, 10)
-    message, address = server_socket.recvfrom(1024)
-    # message = message.upper()
-    message = b'message returned'
-    print(message)
-    print(address)
-    # if rand >= 4:
-    server_socket.sendto(message, address)
+    try:
+        # rand = random.randint(0, 10)
+        message, address = server_socket.recvfrom(1024)
+        # message = message.upper()
+        message = b'message returned'
+        print(message)
+        print(address)
+        # if rand >= 4:
+        server_socket.sendto(message, address)
+    except RuntimeWarning:
+        server_socket.shutdown(socket.SOCK_DGRAM)

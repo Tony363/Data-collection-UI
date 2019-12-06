@@ -19,32 +19,32 @@ import operator
 # g=open("featmap.txt","w+")
 # A=[[random(),random()] for i in range(10)]
 
-seed(1)
+# seed(1)
 
 X=[]
 Y=[]
 
-for _ in range(100):
-    row=[]
+for i in range(100):
+    row = []
     x1 = random()
     x2 = random()
-    px1=str(round(x1,3))
-    px2=str(round(x2,3))
+    # px1=str(round(x1,3))
+    # px2=str(round(x2,3))
     row.append(x1)
     row.append(x2)
     X.append(row)
     #print(float(px1), float(px2))
-    if x1+x2>1:  
-        z=1
+    if x1 + x2 >= 1:  
+        z = 1
         Y.append(z)    
     else: 
-        z=0
+        z = 0
         Y.append(z)
 
 
-# print(X)
-# print(Y)
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+print(X)
+print(Y)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
 
 dtrain = xgb.DMatrix(X[0:70],label=Y[0:70])
 dtest = xgb.DMatrix(X[71:100],label=Y[71:100])
