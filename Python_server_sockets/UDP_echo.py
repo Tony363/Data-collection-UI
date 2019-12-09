@@ -11,7 +11,7 @@ try:
 except socket.error as e:
     print(str(e))
 
-s.listen(5)
+s.listen(1)
 print('Waiting for a connection')
 
 def threaded_client(conn):
