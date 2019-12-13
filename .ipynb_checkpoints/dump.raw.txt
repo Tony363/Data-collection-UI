@@ -1,0 +1,28 @@
+booster[0]:
+0:[f0<0.606790543] yes=1,no=2,missing=1
+	1:[f1<0.88310951] yes=3,no=4,missing=3
+		3:[f1<0.611206889] yes=7,no=8,missing=7
+			7:leaf=-3.5151515
+			8:leaf=-0.800000012
+		4:leaf=2.4000001
+	2:[f1<0.357022464] yes=5,no=6,missing=5
+		5:leaf=-0
+		6:leaf=3.33333325
+booster[1]:
+0:[f0<0.24683398] yes=1,no=2,missing=1
+	1:leaf=-1.6686945
+	2:[f1<0.354506433] yes=3,no=4,missing=3
+		3:leaf=-0.828028262
+		4:leaf=2.5636766
+booster[2]:
+0:[f1<0.583481491] yes=1,no=2,missing=1
+	1:leaf=-0.977704227
+	2:leaf=0.378535926
+booster[3]:
+0:[f0<0.428876162] yes=1,no=2,missing=1
+	1:leaf=-0.707075357
+	2:leaf=0.807572186
+booster[4]:
+0:[f1<0.499111831] yes=1,no=2,missing=1
+	1:leaf=-0.380816847
+	2:leaf=0.317704648
