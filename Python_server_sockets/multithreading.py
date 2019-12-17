@@ -1,6 +1,7 @@
 import logging
 import threading
 import datetime
+import time
 from threading import Lock, Thread
 from udp_server import udp_socket
 
@@ -12,19 +13,18 @@ def printitem(string, name):
 def thread_function(name,n):
 
     logging.info("Thread %s: starting", name)
-    logging.info("Thread %s: finishing", name)
+    
+    time.sleep(3)
 
     for i in range(n):
-        Lock.acquire()
-        # time.sleep(3)
+        # Lock.acquire()
         
         printitem('This is Thread ',name)
-        udp_socket()
+        udp_socket(name)
+      
 
-        Lock.release()
-        
-
-
+        # Lock.release()
+    logging.info("Thread %s: finishing", name)   
 
 if __name__ == "__main__":
     format = "%(asctime)s: %(message)s"
@@ -32,11 +32,13 @@ if __name__ == "__main__":
                         datefmt="%H:%M:%S")
 
     threads = list()
-    for index in range(3):
+    for index in range(4):
         logging.info("Main    : create and start thread %d.", index)
         x = threading.Thread(thread_function(index,index))
         threads.append(x)
+        # time.sleep(2)
         x.start()
+        
      
 
     for index, thread in enumerate(threads):
