@@ -6,7 +6,7 @@ import psutil
 
 new_format = []
 
-INPUT_DIR = r"C:\Users\Tony\Desktop\github\xgboost-with-raymond\excel"
+INPUT_DIR = r"C:\Users\Tony\Desktop\stock market data\new york"
 
 # def iterate_rows(infile,new_format):
   

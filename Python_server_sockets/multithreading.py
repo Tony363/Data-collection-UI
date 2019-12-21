@@ -14,7 +14,7 @@ def thread_function(name,n):
 
     logging.info("Thread %s: starting", name)
     
-    time.sleep(3)
+    # time.sleep(3)
 
     for i in range(n):
         # Lock.acquire()

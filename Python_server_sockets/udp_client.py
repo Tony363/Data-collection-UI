@@ -2,8 +2,8 @@ import time
 import socket
 
 
-for pings in range(5):
-# while True:
+# for pings in range(5):
+while True:
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     client_socket.settimeout(1.0)
     message = b'test'
@@ -16,6 +16,8 @@ for pings in range(5):
         end = time.time()
         elapsed = end - start
         print(f'{server} {data} {elapsed}')
-        time.sleep(2)
+        # time.sleep(1)
     except socket.timeout:
         print('REQUEST TIMED OUT')
+    # except KeyboardInterrupt:
+    #     raise KeyboardInterrupt()
