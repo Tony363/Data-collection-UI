@@ -41,7 +41,7 @@ class Block(pygame.sprite.Sprite):
  
         # Create an image of the block, and fill it with a color.
         # This could also be an image loaded from the disk.
-        self.original_image = pygame.image.load(filename).convert()
+        self.original_image = pygame.image.load('/home/tony/Downloads/crosshair.png').convert()
         self.image = self.original_image
  
         # Set background color to be transparent. Adjust to WHITE if your

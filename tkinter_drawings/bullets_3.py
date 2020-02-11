@@ -25,13 +25,13 @@ clock = pygame.time.Clock()
 pygame.mouse.set_visible(True)
 
 #player character info
-slayerImg = pygame.image.load(r'C:\Users\Tony\Desktop\cl_crosshairstyle_4.png').convert_alpha()
+slayerImg = pygame.image.load(r'/home/tony/Downloads/crosshair.png').convert_alpha()
 slayerWidth = 84
 slayerHeight = 84
 
 
 #mouse info
-mouse_c = pygame.image.load(r'C:\Users\Tony\Desktop\cl_crosshairstyle_4.png').convert_alpha()
+mouse_c = pygame.image.load(r'/home/tony/Downloads/bullet.jpeg').convert_alpha()
 
 def crosshair(mousex,mousey):
    mousex, mousey = pygame.mouse.get_pos()

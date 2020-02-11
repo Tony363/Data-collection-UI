@@ -1,8 +1,8 @@
 import sys, pygame, math;
 from pygame.locals import *;
-spaceship = (r'C:\Users\Tony\Desktop\p01xs9fk.jpg')
-mouse_c = (r'C:\Users\Tony\Desktop\cl_crosshairstyle_4.png')
-backg = (r'C:\Users\Tony\Desktop\download.png')
+spaceship = (r'/home/tony/Downloads/bullet.jpeg')
+mouse_c = (r'/home/tony/Downloads/crosshair.png')
+backg = (r'/home/tony/Downloads/black_background.jpeg')
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 bk = pygame.image.load(backg).convert_alpha()

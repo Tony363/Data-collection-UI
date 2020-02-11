@@ -7,9 +7,9 @@ import math
 pg.init()
 # use an image you have (.bmp  .jpg  .png  .gif)
 # image_file = r"C:\Users\Tony\Desktop\800px_COLOURBOX3347559.jpg"
-spaceship = (r'C:\Users\Tony\Desktop\p01xs9fk.jpg')
-mouse_c = (r'C:\Users\Tony\Desktop\cl_crosshairstyle_4.png')
-backg = (r'C:\Users\Tony\Desktop\download.png')
+spaceship = (r'/home/tony/Downloads/bullet.jpeg')
+mouse_c = (r'/home/tony/Downloads/crosshair.png')
+backg = (r'/home/tony/Downloads/black_background.jpeg')
 
 
 # give the screen a title
