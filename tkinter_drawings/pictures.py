@@ -26,11 +26,13 @@ image_rect = start_rect
 running = True
 
 
+
 while running:
-  
+    
     event = pg.event.poll()
     keyinput = pg.key.get_pressed()
  
+
     # exit on corner 'x' click or escape key press
     if keyinput[pg.K_ESCAPE]:
         raise SystemExit
@@ -38,8 +40,9 @@ while running:
         running = False
     elif event.type == pg.MOUSEBUTTONDOWN:
         
-        print (event.pos, list(event.pos))  # test
+        # print (list(event.pos))  # test
         mouse_loc = "mouse click at (%d, %d)" % event.pos
+        print(mouse_loc)
         pg.display.set_caption(mouse_loc)
         mouse_pos = list(event.pos)
         image_rect = start_rect.move(mouse_pos)
@@ -52,21 +55,18 @@ while running:
        
     screen.blit(bk,(0,0))
     pos = pg.mouse.get_pos()
+  
     screen.blit(mousec,(pos))
-    angle = 360-math.atan2(pos[1]-300,pos[0]-400*180/math.pi)
+    angle = 360-math.atan2(pos[1]-300,pos[0]-400)*180/math.pi
+ 
+    print(pos,angle)
     rotimage = pg.transform.rotate(space_ship,angle)
-    rect = rotimage.get_rect(center=(400,300))
-    screen.blit(rotimage, rect)
-    # pg.display.update()
-    # this erases the old sreen with black
-   
-    # put the image on the screen
-    
+    rect = rotimage.get_rect()
+     
     # update screen
     screen.fill((0,0,0))
-    screen.blit(space_ship, image_rect)
-    pg.display.flip()
-    # clock.tick(30)
+    screen.blit(rotimage, image_rect)
+    pg.display.update()
 
 
     #### https://www.daniweb.com/programming/software-development/code/217116/image-follows-mouse-click-position-pygame
