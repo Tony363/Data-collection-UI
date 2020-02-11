@@ -46,17 +46,18 @@ print(X)
 print(Y)
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
 
-dtrain = xgb.DMatrix(X[0:70],label=Y[0:70])
-dtest = xgb.DMatrix(X[71:100],label=Y[71:100])
+dtrain = xgb.DMatrix(X_train,label=Y_train)
+dtest = xgb.DMatrix(X_test,label=Y_test)
 
-dtrain_svm = xgb.DMatrix('dtrain.svm')
-dtest_svm = xgb.DMatrix('dtest.svm')
+# dtrain_svm = xgb.DMatrix('dtrain.svm')
+# dtest_svm = xgb.DMatrix('dtest.svm')
 
 param = {
         'max_depth': 3, 
         'eta': 2, 
         'objective': 'binary:logistic'
         }
+
 param['nthread'] = 4
 param['eval_metric'] = 'auc'
 evallist = [(dtest, 'eval'), (dtrain, 'train')]
@@ -70,16 +71,16 @@ bst.save_model('0001.model')
 bst.dump_model('dump.raw.txt')
 
 
-bst_svm = xgb.train(param, dtrain_svm, num_round)
-preds_ = bst.predict(dtest_svm)
-best_preds_svm = [np.argmax(line) for line in preds_]
+# bst_svm = xgb.train(dtrain_svm, param, num_round)
+# preds_ = bst.predict(dtest_svm)
+# best_preds_svm = [np.argmax(line) for line in preds_]
 
-bst_svm.save_model('0002.model')
-bst_svm.dump_model('dump_svm.raw.txt','featmap.txt')
+# bst_svm.save_model('0002.model')
+# bst_svm.dump_model('dump_svm.raw.txt','featmap.txt')
 
 #A saved model can be loaded as follows:
 bst = xgb.Booster({'nthread': 4})  # init model
-bst.load_model('model.bin')  # load data
+# bst.load_model('model.bin')  # load data
 # f.close
 # g.close
 
@@ -89,7 +90,7 @@ bst.load_model('model.bin')  # load data
 
 print("Numpy array precision:{}".format(precision_score(Y_test, best_preds )))
     
-print("Svm file precision:{}".format(precision_score(Y_test, best_preds_svm)) )
+# print("Svm file precision:{}".format(precision_score(Y_test, best_preds_svm)) )
 
 # bst = xgb.Booster({'nthread': 4})  # init model
 # bst.load_model('model.bin')  # load data
