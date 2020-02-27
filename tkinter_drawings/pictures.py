@@ -8,16 +8,16 @@ import math
 pg.init()
 
 # use an image you have (.bmp  .jpg  .png  .gif)
-spaceship = (r'/home/tony/Downloads/bullet.jpeg')
+spaceship = (r'/home/tony/Downloads/fighter.png')
 mouse_c = (r'/home/tony/Downloads/crosshair.png')
-backg = (r'/home/tony/Downloads/black_background.jpeg')
+backg = (r'/home/tony/Downloads/cartoon.png')
 
 
 # give the screen a title
 pg.display.set_caption('image follows mouse click position')
 
 # screen size
-screen = pg.display.set_mode((800, 600))
+screen = pg.display.set_mode((1500, 1200))
 
 # load background
 bk = pg.image.load(backg).convert_alpha()
