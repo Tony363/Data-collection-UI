@@ -30,7 +30,7 @@ class ExampleApp(Frame):
         self.start_x = None
         self.start_y = None
 
-        self.im = PIL.Image.open("/home/tony/Downloads/bullet.jpeg")
+        self.im = PIL.Image.open("/home/tony/Downloads/fighter.png")
         self.wazil,self.lard=self.im.size
         self.canvas.config(scrollregion=(0,0,self.wazil,self.lard))
         self.tk_im = ImageTk.PhotoImage(self.im)

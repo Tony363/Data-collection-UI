@@ -31,12 +31,13 @@ def move(event):
     40
     )
     my_canvas.move(circle,x,y)
-    # circle.update()
+    
     coord = my_canvas.coords(circle)
-    print(coord)
+    # print(coord)
+    # circle.update()
     database.append(coord)
     time.sleep(0.1)
-    # my_canvas.update(circle)
+    my_canvas.update(circle)
     
 
 
