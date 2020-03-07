@@ -29,6 +29,8 @@ ANGLE_SPEED = 5
 COIN_COUNT = 5
 COIN_SPEED = 0.5
 
+SHIP_SPEED = 1
+
 class Coin(arcade.Sprite):
     """
     This class represents the coins on our screen. It is a child class of
@@ -104,10 +106,6 @@ class Player(arcade.Sprite):
         self.center_y += self.speed * math.cos(angle_rad)
 
         
-
-
-
-
 class MyGame(arcade.Window):
     """
     Main application class.
@@ -141,8 +139,8 @@ class MyGame(arcade.Window):
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
 
-        self.val_x = 0
-        self.val_y = 0
+        self.val_x = 400
+        self.val_y = 300
 
     def setup(self):
         """ Set up the game and initialize the variables. """
@@ -228,31 +226,36 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.player_sprite.change_angle = -ANGLE_SPEED
 
-    def on_mouse_motion(self,x,y,dx,dy):
+    # def on_mouse_motion(self,x,y,dx,dy):
 
-        self.val_x = x
-        self.val_y = y
+    #     self.val_x = x
+    #     self.val_y = y
+
+    def on_mouse_press(self,x,y,button,modifiers):
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            self.val_x = x
+            self.val_y = y
     
-    def move_sprite(self):
+    
+    # def move_sprite(self):
 
-        x_dist = self.val_x - self.player_sprite._get_position()[0]
-        y_dist = self.val_y - self.player_sprite._get_position()[1]
+    #     x_dist = self.val_x - self.player_sprite._get_position()[0]
+    #     y_dist = self.val_y - self.player_sprite._get_position()[1]
 
-        distance = sqrt(x_dist * x_dist + y_dist * y_dist)
+    #     distance = sqrt(x_dist * x_dist + y_dist * y_dist)
 
-        if distance > 1:
-            self.player_sprite.center_x += x_dist * 0.1
-            self.player_sprite.center_y += y_dist * 0.1
+    #     if distance > 1:
+    #         self.player_sprite.center_x += x_dist * 0.1
+    #         self.player_sprite.center_y += y_dist * 0.1
 
     def follow_mouse(self):
-        # self.player_sprite.center_x = x
-        # self.player_sprite.center_y = y 
-        
+       
 
         start_x = self.player_sprite.center_x
         start_y = self.player_sprite.center_y
 
         # Get the destination location for the bullet
+        
         dest_x = self.val_x
         dest_y = self.val_y
 
@@ -265,11 +268,23 @@ class MyGame(arcade.Window):
 
         # Taking into account the angle, calculate our change_x
         # and change_y. Velocity is how fast the bullet travels.
-        self.change_x = math.cos(angle) * COIN_SPEED
-        self.change_y = math.sin(angle) * COIN_SPEED
+        self.change_x = math.cos(angle) * SHIP_SPEED
+        self.change_y = math.sin(angle) * SHIP_SPEED
 
         self.player_sprite.center_x += self.change_x
         self.player_sprite.center_y += self.change_y
+
+        angle = 360-math.atan2(self.val_x-300,self.val_y-400)*180/math.pi
+        
+        
+        
+        """
+        ENABLE THE NEXT LINE TO ROTATE BY MOUSE CLICK, THIS IS NOT FINISHED YET, I STILL GOTTA EXPLORE MORE!
+        """
+        # self.player_sprite.angle = angle
+
+
+        
 
         
 
