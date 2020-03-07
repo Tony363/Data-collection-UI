@@ -103,6 +103,9 @@ class Player(arcade.Sprite):
         self.center_x += -self.speed * math.sin(angle_rad)
         self.center_y += self.speed * math.cos(angle_rad)
 
+        
+
+
 
 
 class MyGame(arcade.Window):
@@ -192,7 +195,8 @@ class MyGame(arcade.Window):
         # Call update on all sprites (The sprites don't do much in this
         # example though.)
         self.player_list.update()
-        self.move_sprite()
+        # self.move_sprite()
+        self.follow_mouse()
 
 
         for i,coin in enumerate(self.coin_list):
@@ -224,7 +228,7 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.player_sprite.change_angle = -ANGLE_SPEED
 
-    def on_mouse_motion(self,x,y,button,modifiers):
+    def on_mouse_motion(self,x,y,dx,dy):
 
         self.val_x = x
         self.val_y = y
@@ -239,6 +243,33 @@ class MyGame(arcade.Window):
         if distance > 1:
             self.player_sprite.center_x += x_dist * 0.1
             self.player_sprite.center_y += y_dist * 0.1
+
+    def follow_mouse(self):
+        # self.player_sprite.center_x = x
+        # self.player_sprite.center_y = y 
+        
+
+        start_x = self.player_sprite.center_x
+        start_y = self.player_sprite.center_y
+
+        # Get the destination location for the bullet
+        dest_x = self.val_x
+        dest_y = self.val_y
+
+        # Do math to calculate how to get the bullet to the destination.
+        # Calculation the angle in radians between the start points
+        # and end points. This is the angle the bullet will travel.
+        x_diff = dest_x - start_x
+        y_diff = dest_y - start_y
+        angle = math.atan2(y_diff, x_diff)
+
+        # Taking into account the angle, calculate our change_x
+        # and change_y. Velocity is how fast the bullet travels.
+        self.change_x = math.cos(angle) * COIN_SPEED
+        self.change_y = math.sin(angle) * COIN_SPEED
+
+        self.player_sprite.center_x += self.change_x
+        self.player_sprite.center_y += self.change_y
 
         
 
