@@ -1,8 +1,8 @@
 import sys, pygame, math;
 from pygame.locals import *;
-spaceship = (r'/home/tony/Downloads/bullet.jpeg')
+spaceship = (r'/home/tony/Downloads/bullet.jpg')
 mouse_c = (r'/home/tony/Downloads/crosshair.png')
-backg = (r'/home/tony/Downloads/black_background.jpeg')
+backg = (r'/home/tony/Downloads/background.jpeg')
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
 bk = pygame.image.load(backg).convert_alpha()
@@ -21,6 +21,7 @@ while True:
             print("test3")
     screen.blit(bk, (0, 0))
     pos = pygame.mouse.get_pos()
+    print(pos)
     screen.blit(mousec, (pos))
     angle = 360-math.atan2(pos[1]-300,pos[0]-400)*180/math.pi
     rotimage = pygame.transform.rotate(space_ship,angle)

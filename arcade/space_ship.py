@@ -274,6 +274,7 @@ class MyGame(arcade.Window):
         self.player_sprite.center_x += self.change_x
         self.player_sprite.center_y += self.change_y
 
+        #360, 300,400, 180
         angle = 360-math.atan2(self.val_x-300,self.val_y-400)*180/math.pi
         
         
@@ -281,7 +282,7 @@ class MyGame(arcade.Window):
         """
         ENABLE THE NEXT LINE TO ROTATE BY MOUSE CLICK, THIS IS NOT FINISHED YET, I STILL GOTTA EXPLORE MORE!
         """
-        # self.player_sprite.angle = angle
+        self.player_sprite.angle = angle
 
 
         
