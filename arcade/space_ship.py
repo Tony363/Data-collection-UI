@@ -22,8 +22,8 @@ SPRITE_SCALING = 1
 SPRITE_SCALING_COIN = 0.5
 SPRITE_SCALING_LASER = 0.8
 
-SCREEN_WIDTH = 1600
-SCREEN_HEIGHT = 1200
+SCREEN_WIDTH = 1400
+SCREEN_HEIGHT = 1000
 
 SCREEN_TITLE = "run for your life"
 
@@ -31,7 +31,7 @@ MOVEMENT_SPEED = 6
 ANGLE_SPEED = 5
 BULLET_SPEED = 10
 SHIP_SPEED = 4
-COIN_COUNT = 0
+COIN_COUNT = 10
 COIN_SPEED = 1
 
 class Coin(arcade.Sprite):
@@ -101,9 +101,11 @@ class Player(arcade.Sprite):
     def update(self):
         # Convert angle in degrees to radians.
         angle_rad = math.radians(self.angle)
+        # print(self.angle)
 
         # Rotate the ship
         self.angle += self.change_angle
+        
 
         # Use math to find our change based on our speed and angle
         self.center_x += -self.speed * math.sin(angle_rad)
@@ -275,13 +277,13 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.coin_list.draw()
         self.bullet_list.draw()
-        # self.triangle.draw()
+        self.triangle.draw()
 
         # Put the text on the screen.
         output = f"Damage: {self.score}"
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
         if self.score == 5:
-            print(self.tracking_table)
+            # print(self.tracking_table)
             time.sleep(1)
             print('you fucked up')
             time.sleep(1)
@@ -304,10 +306,13 @@ class MyGame(arcade.Window):
             hit_list = arcade.check_for_collision_with_list(bullet,self.coin_list)
 
             if len(hit_list) > 0:
+                arcade.play_sound(self.hit_sound)
                 bullet.remove_from_sprite_lists()
 
             for coin in hit_list:
+                
                 coin.remove_from_sprite_lists()
+                
                 
             if bullet.bottom > self.width or bullet.top < 0 or bullet.right < 0 or bullet.left > self.width:
                 bullet.remove_from_sprite_lists()
@@ -347,12 +352,31 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.val_y = None
             self.player_sprite.change_angle = -ANGLE_SPEED
+        elif key == arcade.key.SPACE:
+
+            bullet = arcade.Sprite(":resources:images/space_shooter/laserBlue01.png", SPRITE_SCALING_LASER)
+            arcade.play_sound(self.gun_sound)
+            start_x = self.player_sprite.center_x
+            start_y = self.player_sprite.center_y
+
+            bullet.center_x = start_x
+            bullet.center_y = start_y
+
+            # print(self.player_sprite.angle)
+            bullet.angle = self.player_sprite.angle + 90
+
+            bullet.change_x = math.cos(self.player_sprite.angle + 90)
+            bullet.change_y =  math.sin(self.player_sprite.angle + 90)
+
+            self.bullet_list.append(bullet)
+
 
     def on_mouse_press(self,x,y,button,modifiers):
 
         if button == arcade.MOUSE_BUTTON_LEFT:
             self.val_x = x
             self.val_y = y
+            arcade.play_sound(self.gun_sound)
 
         bullet = arcade.Sprite(":resources:images/space_shooter/laserBlue01.png", SPRITE_SCALING_LASER)
 
@@ -380,23 +404,10 @@ class MyGame(arcade.Window):
    
     def on_mouse_motion(self,x,y,dx,dy):
         
-        print(x,y)
-        angle = 360-math.atan2(y-300,x-400)*480/math.pi
-
-        # dest_x = x
-        # dest_y = y
-
-        # start_x = self.player_sprite.center_x
-        # start_y = self.player_sprite.center_y
-
-        # # Do math to calculate how to get the bullet to the destination.
-        # # Calculation the angle in radians between the start points
-        # # and end points. This is the angle the bullet will travel.
-        # x_diff = dest_x - start_x
-        # y_diff = dest_y - start_y
-        # angle = math.atan2(y_diff, x_diff)
-
-        self.player_sprite.angle = angle
+        # print(x,y)
+        angle = 360-math.atan2(self.player_sprite.center_x - x,self.player_sprite.center_y - y)*180/math.pi
+  
+        self.player_sprite.angle = angle +180
 
     # def on_mouse_motion(self,x,y,dx,dy):
 
@@ -417,7 +428,6 @@ class MyGame(arcade.Window):
     ########################################
 
 
- 
                
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
@@ -428,7 +438,7 @@ class MyGame(arcade.Window):
             self.player_sprite.change_angle = 0
     
     def get_table(self):
-        print(self.tracking_table)
+        # print(self.tracking_table)
         return self.tracking_table  
 
 
