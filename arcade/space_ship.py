@@ -438,7 +438,7 @@ class MyGame(arcade.Window):
             self.player_sprite.change_angle = 0
     
     def get_table(self):
-        # print(self.tracking_table)
+        print(self.tracking_table)
         return self.tracking_table  
 
 

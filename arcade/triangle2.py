@@ -1,6 +1,7 @@
 import arcade
 import os
 import math
+import random
 
 
 SCREEN_WIDTH = 1400
@@ -86,12 +87,23 @@ class MyGame(arcade.Window):
         # Set the background color
         arcade.set_background_color(arcade.color.BLACK)
 
-        self.triangle_list = []
+        self.shapes = arcade.ShapeElementList()
+
+        self.triangle_table = {}
         self.val_x = 700
         self.val_y = 500
     
 
         self.triangle = Triangle(500,500,arcade.color.WHITE)
+
+        color1 = (215, 214, 165)
+        color2 = (219, 166, 123)
+        points = [(0, 0), (SCREEN_WIDTH//3, 0), (SCREEN_WIDTH//3, SCREEN_HEIGHT//3), (0, SCREEN_HEIGHT//3)]
+
+        self.color_list = (color1,color1,color2,color2)
+        self.color_list2 = (color2,color2,color1,color1)
+        self.point_list = [random.choice(points) for i in range(len(points))]
+        self.count = 0
 
     # def setup(self):
     #     """ Set up the game and initialize the variables. """
@@ -110,6 +122,7 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         self.triangle.draw(500,500)
+        self.shapes.draw()
 
 
     def on_update(self, delta_time):
@@ -121,19 +134,34 @@ class MyGame(arcade.Window):
         self.triangle.triangle_follow(self.val_x,self.val_y)
        
         if self.triangle.center_x > SCREEN_WIDTH//2:
-            print('crossed')
-            self.triangle.draw(self.val_x,self.val_y)
+            # print('crossed')
+            shape = arcade.create_triangles_filled_with_colors(self.point_list,self.color_list)
+            self.shapes.append(shape)
 
         if self.triangle.center_y > SCREEN_HEIGHT//2:
-            print('crossed')
-            self.triangle.draw(self.val_x,self.val_y)
+            # print('crossed')
+            shape = arcade.create_triangles_filled_with_colors(self.point_list,self.color_list2)
+            self.shapes.append(shape)
 
     def on_mouse_press(self,x,y,button,modifiers):
-
+        
         if button == arcade.MOUSE_BUTTON_LEFT:
+            self.count += 1
             self.val_x = x
             self.val_y = y
+
+            print(self.count)
+            for count in range(self.count):
+                if f'coor {self.count}' not in self.triangle_table: 
+                    self.triangle_table[f'coor {self.count}'] = self.val_x,self.val_y
+                elif f'coor {self.count}' in self.triangle_table:
+                    continue
+            
             # print(self.val_x,self.val_y)
+    
+    def get_table(self):
+        print(self.triangle_table)
+        return self.triangle_table
 
    
 def main():
@@ -141,7 +169,7 @@ def main():
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     # window.setup()
     arcade.run()
-    # window.get_table()
+    window.get_table()
 
 
 if __name__ == "__main__":
