@@ -5,6 +5,9 @@ import os
 import time
 
 
+
+
+
 def udp_socket(index):
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server_socket.bind(('', 12000))
@@ -12,6 +15,7 @@ def udp_socket(index):
     
    
     try:
+        i = 0
         while True:
             server_socket.settimeout(10)
         
@@ -23,7 +27,8 @@ def udp_socket(index):
             send_message = bytes('connection established: index {}'.format(index), encoding='utf-8')
             print(message)
             
-            server_socket.sendto(send_message, address)
+            # server_socket.sendto(send_message, address)
+            # i += 1
     except socket.timeout:
         print('exceeded time')
         server_socket.close()

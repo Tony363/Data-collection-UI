@@ -4,6 +4,7 @@ import math
 import random
 
 
+
 SCREEN_WIDTH = 1400
 SCREEN_HEIGHT = 1000
 
@@ -57,6 +58,12 @@ class Triangle:
                                     self.center_x, self.center_y - 100,
                                     self.center_x + 80, self.center_y -100,
                                     arcade.color.WHITE)
+
+    # def draw(self):
+    #     arcade.draw_triangle_filled(self.x, self.y,
+    #                                 self.x1, self.y1,
+    #                                 self.x2, self.y2,
+    #                                 arcade.color.WHITE)
 
     #If f is your angle, (x,y) becomes (xcosf−ysinf,ycosf+xsinf).
 
@@ -232,12 +239,13 @@ class MyGame(arcade.Window):
          
 
     def on_mouse_press(self,x,y,button,modifiers):
-        
+
+        # client.sendto(message)
         if button == arcade.MOUSE_BUTTON_LEFT:
             self.count += 1
             self.val_x = x
             self.val_y = y
-            # self.triangle.rotate()
+            self.triangle.rotate()
        
 
             for count in range(self.count):
@@ -253,13 +261,19 @@ class MyGame(arcade.Window):
         return self.triangle_table
 
    
-def main():
+def main(client):
     """ Main method """
+    import json
+    player = client
+    
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     window.setup()
     arcade.run()
-    window.get_table()
+    table = window.get_table()
+    byte = json.dumps(table,indent=2).encode('utf-8')
+    player.sendto(byte, ("127.0.0.1", 12000))
+    return window.get_table()
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
